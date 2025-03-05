@@ -3,6 +3,7 @@
 __author__ = 'enzhao'
 # Created by enzhao on 2025/3/3.
 
+# pip install opencv-python-headless
 import cv2
 import numpy as np
 import sys
