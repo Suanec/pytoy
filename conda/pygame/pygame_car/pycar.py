@@ -11,12 +11,14 @@ CAR_HEIGHT = 30
 CENTER_LEFT = WINDOW_WIDTH / 2 - CAR_WIDTH / 2
 CENTER_TOP = WINDOW_HEIGHT / 2 - CAR_HEIGHT / 2
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))  # 设置窗口尺寸[1](@ref)
+milk_yellow = (255, 227, 174),             # 奶油黄
+pink = (255, 192, 203),             # 粉红
 class Car:
     def __init__(self, x, y):
         self.x = x  # 坐标初始化[1](@ref)
         self.y = y
         self.image = pygame.Surface((CAR_WIDTH, CAR_HEIGHT))  # 车身尺寸50x30像素
-        self.image.fill((255, 0, 0))  # 填充红色[1](@ref)
+        self.image.fill(milk_yellow)  # 填充红色[1](@ref)
 
     def add_x(self, _delta = 0):
         self.x += _delta
@@ -40,12 +42,12 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    screen.fill((0, 0, 0))  # 清屏为黑色背景
+    screen.fill(pink)  # 清屏为黑色背景
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]: car.add_x(-2)  # 左移
     elif keys[pygame.K_RIGHT]: car.add_x(2)  # 右移
-    elif keys[pygame.K_UP]: car.add_y(-2)  # 左移
-    elif keys[pygame.K_DOWN]: car.add_y(2)  # 右移
+    elif keys[pygame.K_UP]: car.add_y(-2)  # 上移
+    elif keys[pygame.K_DOWN]: car.add_y(2)  # 下移
     font = pygame.font.Font(None, 36)
     text = font.render("Use ARROWS to move", True, (255, 255, 255))
     screen.blit(text, (100, 50))  # 在指定位置渲染文本[1](@ref)
