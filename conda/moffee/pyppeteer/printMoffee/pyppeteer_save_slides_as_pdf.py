@@ -55,6 +55,7 @@ async def save_slides_as_pdf(url, output_path):
 if __name__ == '__main__':
     # 使用示例
     url = 'http://127.0.0.1:5500'  # 替换为实际幻灯片网址
+    # url = 'file:///Users/enzhao/suanec/weibo/moffee-latex-ppt-demo/d/index.html'  # 替换为实际幻灯片网址
     output_path = 'slides.pdf'
     asyncio.run(save_slides_as_pdf(url, output_path))
     # browser = launch(headless=True)
