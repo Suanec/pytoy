@@ -39,7 +39,7 @@ OUTPUT_PDF_FPATH_FMT = os.sep.join([KSP_PATH, T_NAME_FMT + ".pdf"])
 def export(_md: str, _output: str) -> str:
     moffee_cli.run(_md, output=_output, live=False)
 
-def main(_md_content: str) -> None:
+def md_to_slide_entrance(_md_content: str) -> None:
     cur_t_name = os.path.split(tempfile.mkdtemp(prefix=""))[1]
     print("Cur fname %s" % cur_t_name)
     md_fpath = MD_FPATH.format(T_NAME=cur_t_name)
@@ -52,9 +52,14 @@ def main(_md_content: str) -> None:
     print("Open %s" % url)
     output_path = OUTPUT_PDF_FPATH_FMT.format(T_NAME=cur_t_name)
     print("Save to %s" % output_path)
-    asyncio.run(save_slides_as_pdf(url, output_path))
+    # asyncio.run(save_slides_as_pdf(url, output_path))
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    pdf_data = loop.run_until_complete(save_slides_as_pdf(url, output_path))
+
+    return { "url": url, "output_path": output_path}
 
 
 if __name__ == '__main__':
     with open(os.path.abspath(sys.argv[1]), "r", encoding="utf-8") as f:
-        main(f.read())
+        md_to_slide_entrance(f.read())
