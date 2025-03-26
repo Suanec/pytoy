@@ -7,7 +7,19 @@ import asyncio
 from pyppeteer import launch
 
 async def save_slides_as_pdf(url, output_path):
-    browser = await launch(headless=True)
+    browser = await launch(
+        headless=True,
+        args=[
+            '--no-sandbox',  # 禁用沙盒（适用于 Docker/Linux）
+            '--disable-setuid-sandbox',  # 禁用 setuid 沙盒
+            '--disable-dev-shm-usage',  # 避免 /dev/shm 不足
+            '--disable-accelerated-2d-canvas',
+            '--disable-gpu',  # 禁用 GPU 加速
+            '--single-process',  # 单进程模式（可选）
+        ],
+        ignoreHTTPSErrors=True,
+        dumpio=True,  # 打印浏览器日志（调试用）
+    )
     try:
         page = await browser.newPage()
 

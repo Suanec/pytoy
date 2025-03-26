@@ -7,7 +7,7 @@ import cv2
 import numpy as np
 
 # 1. 读取图像
-image = cv2.imread('WechatIMG473.jpg')
+image = cv2.imread('temp.jpg')
 
 # 可选预处理：高斯模糊去噪
 blur = cv2.GaussianBlur(image, (5,5), 0)
